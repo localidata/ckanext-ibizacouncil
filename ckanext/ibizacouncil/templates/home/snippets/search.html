@@ -1,0 +1,131 @@
+{% set tags = h.get_facet_items_dict('tags', limit=3) %}
+{% set groups = h.get_group_list_order() %}
+
+
+<div class="module module-search module-narrow module-shallow box">
+  <form class="module-content search-form" method="get" action="{% url_for controller='package', action='search' %}">
+    <h3 class="heading">{{ _("Search Datasets") }}</h3>
+    <div class="search-input control-group search-giant">
+      <input type="text" class="search" id="busquedaQ" name="q" value="" autocomplete="off" placeholder="{{ _('eg: spending') }}" />
+      <button type="submit">
+        <i class="icon-search"></i>
+        <span>{{ _('Search') }}</span>
+      </button>
+    </div>
+  </form>
+  <div class="tags">
+    <h3>{{ _('Popular tags') }}</h3>
+    {% for tag in tags %}
+      <a class="tag" href="{% url_for controller='package', action='search', tags=tag.name %}">{{ h.truncate(tag.display_name, 22) }}</a>
+    {% endfor %}
+  </div>
+  <div class="search-by-cat">
+      <h3 class="heading">{{ _("Groups") }}</h3>
+      <ul class="surrey-media-grid">
+
+        {% for group in groups %}
+          <li class="surrey-media-item class{{ group.package_count }}" name="grupoL">     
+              <!--h3 class="media-heading">{{ group.display_name }}</h3-->
+              <a href="{{ h.url_for(controller='group', action='read', id=group.name) }}" title="{{ _('{name}').format(name=group.display_name) }}">
+              <img class="iconoGrupoPortada" src="{{ group.image_display_url or h.url_for_static('/base/images/placeholder-group.png') }}" alt="{{ group.name }}" />
+              <span style="font-weight:bold">{{ _('{name}').format(name=group.display_name) }}</span></a>			  
+			  <span class="count">{{ ungettext('{num} Dataset', '{num} Datasets', group.package_count).format(num=group.package_count) }}</span>			  
+        </li>
+        {% endfor %}
+      </ul>
+      <div style="clear:both"></div> 
+  </div>
+</div>
+<div id="parrafoMas" style="text-align:center;width:100%;"></div>
+  </div>
+</div>
+
+<script type="text/javascript" src="/fanstatic/vendor/:version:2019-02-28T17:43:41.56/jquery.min.js"></script>
+<script>
+var grupos=document.getElementsByName("grupoL");
+if (grupos.length>6)
+	{
+		oculta();
+	}
+	
+function muestraTodos(){
+		for (var i=6;i<grupos.length;i++)
+		{
+			if(grupos[i].className!='surrey-media-item class0')
+				grupos[i].style.display="block";
+		}
+		document.getElementById("parrafoMas").innerHTML="<div style='clear: both'><h5><a href='javascript:oculta()' style='color: #333;'>{{ _('Hide')}}</a></h5></div>";
+}	
+
+function oculta(){
+		for (var i=6;i<grupos.length;i++)
+		{
+			grupos[i].style.display="none";
+		}
+		document.getElementById("parrafoMas").innerHTML="<div style='clear: both'><h5><a href='javascript:muestraTodos()'  style='color: #333;'>{{ _('Show more')}}</a></h5></div>";
+}
+	
+//Funcionalidad Etiquetas
+var etiquetasBusqueda=new Array();
+$(document).ready(function(){  	  
+	   $.ajax({
+			url: '/api/3/action/tag_list',
+			contentType: "application/json;charset=UTF-8",
+			dataType:'json',
+			success: function(datos){        					
+				arrayDatos=datos.result;
+				//console.log(arrayDatos);
+				var vectorSuperior=new Array();
+				if (arrayDatos.length>0)
+				{
+					//console.log(arrayDatos)
+					for (var i=0;i<arrayDatos.length;i++)				
+					{
+						cDatos=arrayDatos[i];						
+						etiquetasBusqueda.push(cDatos);									
+					}
+					if ($("#busquedaQ")!=null)
+					{
+						setInterval(function(){cambiaBusqueda(etiquetasBusqueda)},5000);
+					}
+				}
+				
+			}
+		});
+});
+
+
+function cambiaBusqueda(vector){	
+	var _ejemplo='ej. ';
+	cajaBusqueda=$("#busquedaQ");		
+	//console.log("cajaBusqueda:"+cajaBusqueda.val())
+	if (cajaBusqueda.val()=='')
+		{
+			//console.log("entro en el if")
+			placeHolderActual=$("#busquedaQ").attr("placeholder");
+			placeHolderActual=placeHolderActual.replace(_ejemplo, ""); 
+			//console.log(placeHolderActual)
+			posicion=vector.indexOf(placeHolderActual);			
+			//console.log(posicion)
+			if ((posicion==-1)&&(vector.length>0))
+				posicion=0;
+			if (posicion>=0)			
+			{
+				if (posicion==vector.length-1)
+					posicion=0;
+				else
+					posicion++;
+				cajaBusqueda.attr("placeholder", _ejemplo+vector[posicion]);				
+			}
+		  
+		}
+}	
+	
+</script>
+<style>
+.class0{
+    display:none;
+}
+</style>
+
+
