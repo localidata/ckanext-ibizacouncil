@@ -1,0 +1,11 @@
+
+msgid ""
+msgstr ""
+
+
+#: ckanext/surrey/controller.py:76 ckanext/surrey/controller.py:88
+#: ckanext/surrey/controller.py:113 ckanext/surrey/plugin.py:452
+#, python-format
+msgid "Popular datasets"
+msgstr ""
+
