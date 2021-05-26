@@ -18,9 +18,9 @@ To install ckanext-ibizacouncil:
 2. Install the ckanext-ibizacouncil Python package into your virtual environment::
 
      cd /usr/lib/ckan/default/src
-	 git clone https://github.com/localidata/ckanext-ibizacouncil
-	 cd ckanext-ibizacouncil
-	 python setup.py develop
+     git clone https://github.com/localidata/ckanext-ibizacouncil
+     cd ckanext-ibizacouncil
+     python setup.py develop
 
 3. Add ``ibizacouncil`` to the ``ckan.plugins`` setting in your CKAN
    config file (by default the config file is located at
