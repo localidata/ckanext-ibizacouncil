@@ -1,10 +1,30 @@
 {% ckan_extends %}
 
-{% block header_site_navigation_tabs %}
-{{ h.build_nav_main( 
-		  ('search', _('Datasets')), 
-		  ('organizations_index', _('Organizations')),
-          ('group_index', _('Groups')), 
-		  ('home.about', _('About')) ) }} 
-{% endblock %}
+{% block header_site_navigation %}
+        <nav class="section navigation">
+		<div style="float:right">
+          <ul class="nav nav-pills">
+			
+			<li>    
+				<a href="/dataset">{{ _('Datasets') }}</a>	
+			</li>
+			<li>
+				<a href="/suggest">{{ _('Groups') }}</a>
+			</li>
+			<li>
+				<a href="/about">{{ _('About') }}</a>
+			</li>
+  
+
+          
+			
+          </ul>
+		   </div>
+		  <div style="clear:both">
+			<ul class="nav navbar-nav">
+											
+			</ul>
+			</div>
+        </nav>
+      {% endblock %}
 
