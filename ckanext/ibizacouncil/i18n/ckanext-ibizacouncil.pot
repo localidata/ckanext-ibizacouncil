@@ -16,4 +16,11 @@ msgstr ""
 msgid "hits"
 msgstr ""
 
+msgid "Recently updated"
+msgstr ""
 
+msgid "Datasets recently modified"
+msgstr ""
+
+msgid "Updated on "
+msgstr ""

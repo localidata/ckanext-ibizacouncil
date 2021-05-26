@@ -16,6 +16,15 @@ msgstr "visita"
 msgid "hits"
 msgstr "visitas"
 
+msgid "Recently updated"
+msgstr "Últimas actualizaciones"
+
+msgid "Datasets recently modified"
+msgstr "Conjuntos de datos modificados recientemente"
+
+msgid "Updated on "
+msgstr "Actualizado el día "
+
 
 
 

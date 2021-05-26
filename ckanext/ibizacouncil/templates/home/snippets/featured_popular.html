@@ -27,7 +27,7 @@ set output =  h.get_visit_summary_list(5)
 					{% if package.tracking_summary.recent > 1 %}
 						{{ _('hits') }}
 					{% endif %} 																			
-					{% if package.tracking_summary.recent >= 5 %}
+					{% if package.tracking_summary.recent >= 10 %}
 						<img src="/images/fuegoMini.gif" title="{{ _('Popular dataset') }}" alt="({{ _('Popular dataset') }})" style="vertical-align: bottom">
 					{% endif %} 		
 					</div>
