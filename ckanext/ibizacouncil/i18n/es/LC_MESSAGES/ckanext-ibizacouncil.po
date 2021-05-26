@@ -4,5 +4,18 @@ msgstr ""
 msgid "Popular datasets"
 msgstr "Conjuntos de datos más populares"
 
+msgid "Popular dataset"
+msgstr "Conjunto de datos popular"
+
+msgid "Most viewed in the last 14 days"
+msgstr "Los más vistos en los últimos 14 días"
+
+msgid "hit"
+msgstr "visita"
+
+msgid "hits"
+msgstr "visitas"
+
+
 
 
