@@ -1,11 +1,26 @@
-
 msgid ""
 msgstr ""
 
-
-#: ckanext/surrey/controller.py:76 ckanext/surrey/controller.py:88
-#: ckanext/surrey/controller.py:113 ckanext/surrey/plugin.py:452
-#, python-format
 msgid "Popular datasets"
 msgstr ""
 
+msgid "Popular dataset"
+msgstr ""
+
+msgid "Most viewed in the last 14 days"
+msgstr ""
+
+msgid "hit"
+msgstr ""
+
+msgid "hits"
+msgstr ""
+
+msgid "Recently updated"
+msgstr ""
+
+msgid "Datasets recently modified"
+msgstr ""
+
+msgid "Updated on "
+msgstr ""

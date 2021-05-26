@@ -1,8 +1,10 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.lib.plugins import DefaultTranslation
 
 
-class IbizacouncilPlugin(plugins.SingletonPlugin):
+class IbizacouncilPlugin(plugins.SingletonPlugin, DefaultTranslation):
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
 
     # IConfigurer
