@@ -9,7 +9,8 @@ class IbizacouncilPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # IConfigurer
 
-    def update_config(self, config_):
-        toolkit.add_template_directory(config_, 'templates')
-        toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'ibizacouncil')
+    def update_config(self, config):
+        toolkit.add_template_directory(config, 'templates')
+        toolkit.add_public_directory(config, 'public')
+        toolkit.add_resource('fanstatic', 'ckanext-ibizacouncil')
+        toolkit.add_resource('public', 'ckanext-ibizacouncil')

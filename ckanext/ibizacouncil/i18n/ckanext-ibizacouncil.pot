@@ -24,3 +24,9 @@ msgstr ""
 
 msgid "Updated on "
 msgstr ""
+
+msgid "In the News"
+msgstr ""
+
+msgid "News Аrchive"
+msgstr ""
