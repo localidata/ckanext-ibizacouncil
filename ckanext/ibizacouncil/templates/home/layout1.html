@@ -1,13 +1,82 @@
-<div role="main" class="hero">
   <div class="container">
 	{% block promoted %}
 	   {% snippet 'home/snippets/promoted.html' %}
-	   {% endblock %}
-	{% block search %}
-        {% snippet 'home/snippets/search.html' %}
 	{% endblock %}
+ </div>
+ 
+{% if g.hero_image_url %}
+  {% if not g.hero_image_url.startswith('http') %}
+    {% set hero_image_url = h.url_for_static('uploads/admin/' + g.hero_image_url) %}
+  {% else %}
+    {% set hero_image_url = g.hero_image_url %}
+  {% endif %}
+{% endif %}
+
+<div role="main"
+  {% if hero_image_url %}
+    class="hero hero-search"
+    style="background-image: url({{ hero_image_url }})"
+  {% else %}
+    class="hero hero-search hero-default-background"
+  {% endif %}
+>
+  {% block search %} {% snippet 'home/snippets/hero_search.html' %} {% endblock %}
+</div>
+
+{% set news = h.get_recent_blog_posts(3) %}
+{% set groups = h.get_group_list() %}
+<div {% if news or groups %} role="main" {% endif %}>
+  <div class="container">
+    {% if groups %}
+      <div class="module module-topics">
+        <ul class="module-topics-list">
+          {% for group in groups %}
+            {% set group_url = h.url_for(controller='group', action='read', id=group.name) %}
+
+            {% if group.image_display_url %}
+              {% set group_image = group.image_display_url %}
+            {% else %}
+              {% set group_image = '/base/images/placeholder-group.png' %}
+            {% endif %}
+
+            <li>
+              <a href="{{ group_url }}" class="topic">
+                <img class="topic-icon" src="{{ group_image }}" alt="{{ group.title }}">
+                <span class="topic-title">{{ group.title }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if news %}
+      <div class="news">
+        <div class="news-header">
+          <h3 class="news-header-title">{{ _('In the News') }}</h3>
+          {% set news_url = h.url(controller='pages', action='blog_index') %}
+          <a class="btn btn-small btn-news-archive" href="{{ news_url }}">{{ _('News Аrchive') }}</a>
+        </div>
+        <div class="news-items-container">
+          {% for article in news %}
+            {% set article_url = h.url_for(controller='pages', action='blog_show', page='/' + article.name) %}
+            <a href="{{ article_url }}" class="news-item">
+              {% if article.image %}
+                <figure class="news-item-photo">
+                  <img src="{{ article.image }}" alt="{{ article.title }} news article cover">
+                </figure>
+              {% endif %}
+              <span class="news-item-title">{{ article.title or article.name }}</span>
+              <span class="news-item-description">{{ h.markdown_extract(article.content) }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- .news -->
+    {% endif %}
   </div>
 </div>
+
 <div role="main">
   <div class="container">
     <div class="row">
@@ -20,4 +89,3 @@
     </div>
   </div>
 </div>
-

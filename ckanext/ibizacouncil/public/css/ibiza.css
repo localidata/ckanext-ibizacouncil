@@ -1,1 +1,5 @@
 /*Estilos propios de la Ibiza*/
+
+.media-item{
+	min-height:325px !important;
+}
